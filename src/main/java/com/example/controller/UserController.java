@@ -47,7 +47,18 @@ public class UserController {
             model.addAttribute("msg","注册失败");
             return "user/dologin";
        }
+    }
+    @RequestMapping(value = "/doindex", method = RequestMethod.POST)
+    public String doIndex(HttpServletResponse response, User user, Model model){
+        if(userService.doLogin(user.getUsername(),user.getPassword())){
+            model.addAttribute("user",user);
+            System.out.println("homepage");
+            return "redirect:/article/homepage";
+
+        }else{
+            model.addAttribute("error","用户名或密码错误");
+            return "redirect:/user/index";
+        }
 
     }
-
 }

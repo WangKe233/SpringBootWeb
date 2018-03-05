@@ -19,6 +19,14 @@ public class UserService {
     public boolean  save(User user){
         userDao.save(user);
         return true;
-
     }
+    public boolean doLogin(String username, String password){
+        User user = userDao.findByUsernameAndPassword(username, password);
+        if(user == null){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
 }
