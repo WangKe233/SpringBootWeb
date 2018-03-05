@@ -23,18 +23,33 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/index")
-    public String index(){
-        return "user/index";
+    /**
+     * 登陆首页
+     * @return
+     */
+    @RequestMapping("/login")
+    public String login(){
+        return "user/login";
     }
 
+    /**
+     * 注册首页
+     * @return
+     */
     @RequestMapping("/gologin")
-    public String  gologin(){
+    public String  goLogin(){
         return "user/dologin";
     }
 
+    /**
+     * 用户名校验
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/dologin", method = RequestMethod.POST)
-    public String  dologin(HttpServletRequest request, HttpServletResponse response,Model model)  {
+    public String  doLogin(HttpServletRequest request, HttpServletResponse response,Model model)  {
         String username = request.getParameter("username_login");
         String password = request.getParameter("password_login");
 
@@ -42,18 +57,21 @@ public class UserController {
         System.out.println(username + "--------" + password);
        if (userService.save(user)){
            model.addAttribute("msg","注册成功");
-           return ("redirect:/user/index");
+           return ("redirect:/user/login");
        }else {
             model.addAttribute("msg","注册失败");
             return "user/dologin";
        }
     }
-    @RequestMapping(value = "/doindex", method = RequestMethod.POST)
-    public String doIndex(HttpServletResponse response, User user, Model model){
-        if(userService.doLogin(user.getUsername(),user.getPassword())){
+    @RequestMapping(value = "/doregist", method = RequestMethod.POST)
+    public String doRegist(HttpServletRequest request,HttpServletResponse response, User user, Model model){
+        String username = request.getParameter("username_login");
+        String password = request.getParameter("password_login");
+
+        if(userService.doLogin(username,password)){
             model.addAttribute("user",user);
             System.out.println("homepage");
-            return "redirect:/article/homepage";
+            return "redirect:/article";
 
         }else{
             model.addAttribute("error","用户名或密码错误");
