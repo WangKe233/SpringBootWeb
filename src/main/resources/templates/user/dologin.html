@@ -17,8 +17,8 @@
         <h2 class="form-signin-heading">请注册</h2>
 
         <!--@thymesVar id="msg" type="text"-->
-        <div th:if="${msg}">
-            <div th:text="${msg}" style="color:#F00" ></div>
+        <div th:if ="${msg} ">
+            <div th:text="${msg}" style="color:#ff383d" ></div>
         </div>
         <label for="inputEmail" class="sr-only">请输入用户名</label>
         <input type="text" id="inputEmail" name="username_login"  class="form-control" placeholder="用户名" required autofocus>

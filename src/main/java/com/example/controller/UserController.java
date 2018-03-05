@@ -37,6 +37,7 @@ public class UserController {
     public String  dologin(HttpServletRequest request, HttpServletResponse response,Model model)  {
         String username = request.getParameter("username_login");
         String password = request.getParameter("password_login");
+
         User user = new User(username,password);
         System.out.println(username + "--------" + password);
        if (userService.save(user)){
