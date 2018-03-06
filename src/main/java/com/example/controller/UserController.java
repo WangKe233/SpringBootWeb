@@ -33,6 +33,14 @@ public class UserController {
     }
 
     /**
+     * 登录后显示首页
+     * @return
+     */
+    @RequestMapping("/index")
+    public String index(){
+        return "user/index";
+    }
+    /**
      * 注册首页
      * @return
      */
@@ -64,18 +72,15 @@ public class UserController {
        }
     }
     @RequestMapping(value = "/doregist", method = RequestMethod.POST)
-    public String doRegist(HttpServletRequest request,HttpServletResponse response, User user, Model model){
-        String username = request.getParameter("username_login");
-        String password = request.getParameter("password_login");
+    public String doregist(HttpServletRequest request,HttpServletResponse response,User user,  Model model){
 
-        if(userService.doLogin(username,password)){
+        if(userService.doLogin(user.getUsername(),user.getPassword())){
             model.addAttribute("user",user);
-            System.out.println("homepage");
-            return "redirect:/article";
+            return "user/index";
 
         }else{
             model.addAttribute("error","用户名或密码错误");
-            return "redirect:/user/index";
+            return "user/login";
         }
 
     }

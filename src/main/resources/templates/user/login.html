@@ -14,7 +14,8 @@
 
 <div class="container">
 
-    <form class="form-signin" action="doregist" method="post">
+    <form  class="form-signin" action="#" th:action="@{/user/doregist}" th:object="${user}"  method="post">
+
         <h2 class="form-signin-heading">请登录</h2>
 
         <!--@thymesVar id="error" type="text"-->

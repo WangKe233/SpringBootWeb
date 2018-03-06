@@ -15,16 +15,17 @@ public class UserService {
     @Autowired
     UserDao userDao;
 
-    @Transactional(rollbackFor = Exception.class)
     public boolean  save(User user){
         userDao.save(user);
         return true;
     }
     public boolean doLogin(String username, String password){
         User user = userDao.findByUsernameAndPassword(username, password);
-        if(user == null){
+        if(null == user){
+
             return false;
         }else {
+
             return true;
         }
     }
